@@ -1,11 +1,12 @@
 <h1 align="center">[Writeup] Transferencia - Whoami-Labs</h1>
 
-**Dificultad:** Fácil
-**Categoría:** Concept & Beginner / Linux / Anonymous FTP / Password Reuse / SUID Privilege Escalation
-**Autor:** Dzykhed
-**Fecha:** 02-11-2026
+**Dificultad:** Fácil  
+**Categoría:** Concept & Beginner / Linux / Anonymous FTP / Password Reuse / SUID Privilege Escalation  
+**Autor:** Dzykhed (Gilberto Wright)  
+**Fecha:** 02-11-2026  
 **Plataforma:** [Whoami-Labs](https://whoami-labs.com/)
 
+--------------------------------------------------------------------------------
 #### Descripción
 "Escenario de entrenamiento en ciberseguridad ofensiva enfocado en Concept & Beginner con dificultad Facil. Diseñado para evaluar metodología de enumeración, explotación de vectores de ataque y escalada de privilegios en entornos Linux."
 ![Ficha del laboratorio Transferencia](images/Screenshot_16.png)
