@@ -6,12 +6,12 @@
 **Fecha:** 02-11-2026
 **Plataforma:** [Whoami-Labs](https://whoami-labs.com/)
 
-##### Descripción
+#### Descripción
 "Escenario de entrenamiento en ciberseguridad ofensiva enfocado en Concept & Beginner con dificultad Facil. Diseñado para evaluar metodología de enumeración, explotación de vectores de ataque y escalada de privilegios en entornos Linux."
 ![Ficha del laboratorio Transferencia](images/Screenshot_16.png)
-##### 1. Descubrimiento
+#### 1. Descubrimiento
 
-###### 1.1 Despliegue del Entorno e Identificación de Host:
+##### 1.1 Despliegue del Entorno e Identificación de Host:
 El primer paso consistió en desplegar la máquina del laboratorio ejecutando el script de aprovisionamiento `startlab.sh` sobre el paquete del contenedor `transferencia.tar`:
 
 ```bash
@@ -25,7 +25,7 @@ El script confirmó el despliegue del contenedor y nos asignó la dirección IP 
 **Explicación del comando:**
 * `sudo bash startlab.sh transferencia.tar` → Carga la imagen Docker del laboratorio en el sistema local y asigna la dirección IP interna al contenedor.
 
-###### 1.2 Escaneo de Red y Nmap:
+##### 1.2 Escaneo de Red y Nmap:
 Procedimos a realizar un escaneo exhaustivo sobre los 65,535 puertos TCP para determinar los servicios expuestos en la máquina objetivo (`172.17.0.2`):
 
 ```bash
@@ -57,7 +57,7 @@ El escaneo detallado expuso la siguiente información técnica:
 * **`22/tcp` (SSH - OpenSSH 10.0p2 Debian 7):** Servicio de administración remota en un sistema basado en Debian.
 * **`80/tcp` (HTTP - Nginx):** Servidor web con el título de página `Transferencia`.
 
-###### 1.3 Enumeración Web y Acceso FTP Anónimo:
+##### 1.3 Enumeración Web y Acceso FTP Anónimo:
 Evaluamos inicialmente el servidor HTTP (`80/tcp`) accediendo desde el navegador y realizando peticiones directas:
 
 ![Inspección del servicio web HTTP en el puerto 80](images/Screenshot_4.png)
@@ -109,9 +109,9 @@ alberto:admin123
 **Explicación del comando:**
 * `cat usuarios.txt` → Imprime en consola el contenido del archivo exfiltrado mostrando los 6 pares de credenciales en formato `usuario:contraseña`.
 
-##### 2. Explotación / Acceso Inicial
+#### 2. Explotación / Acceso Inicial
 
-###### 2.1 Ataque de Diccionario en SSH:
+##### 2.1 Ataque de Diccionario en SSH:
 Aprovechando la lista de cuentas obtenida (`usuarios.txt`), realizamos una prueba de autenticación dirigida contra el servicio OpenSSH (`22/tcp`) empleando **Hydra** con la opción `-C`:
 
 ```bash
@@ -125,7 +125,7 @@ hydra -C usuarios.txt ssh://172.17.0.2
 
 Hydra confirmó la validez del par de credenciales correspondiente al usuario **`alberto`** (`admin123`).
 
-###### 2.2 Obtención de Acceso Inicial (Foothold / User Flag):
+##### 2.2 Obtención de Acceso Inicial (Foothold / User Flag):
 Iniciamos sesión remota mediante SSH utilizando la cuenta descubierta:
 
 ```bash
@@ -139,9 +139,9 @@ ssh alberto@172.17.0.2
 
 Ingresamos la contraseña `admin123` y logramos el acceso inicial obteniendo una consola interactiva `-bash-5.2$`.
 
-##### 3. Enumeración para Escalada de Privilegios
+#### 3. Enumeración para Escalada de Privilegios
 
-###### 3.1 Análisis Local de Privilegios:
+##### 3.1 Análisis Local de Privilegios:
 Dentro del sistema como usuario `alberto`, iniciamos la fase de reconocimiento local para comprender el contexto de privilegios e identidad:
 
 ```bash
@@ -177,7 +177,7 @@ sudo -l
 
 Confirmamos que `/etc/passwd` únicamente puede ser modificado por `root` (`-rw-r--r--`) y que la cuenta `alberto` no cuenta con permisos asignados en `sudoers`.
 
-###### 3.2 Búsqueda de Binarios con bit SUID Activo:
+##### 3.2 Búsqueda de Binarios con bit SUID Activo:
 Auditamos la presencia de archivos ejecutables con el permiso especial **SUID** (`-perm -4000`) propiedad del usuario `root`:
 
 ```bash
@@ -191,7 +191,7 @@ find / -type f -perm -4000 -ls 2>/dev/null
 
 El rastreo detectó una anomalía crítica de seguridad: el ejecutable de la shell `/usr/bin/bash` tiene asignado el bit SUID (`-rwsr-xr-x 1 root root`).
 
-###### 3.3 Explotación de SUID y Acceso a Root:
+##### 3.3 Explotación de SUID y Acceso a Root:
 Analizamos las propiedades del ejecutable `/usr/bin/bash` e invocamos la shell con el parámetro de modo privileged `-p` para evitar que se restablezca el identificador de usuario efectivo (`EUID`):
 
 ```bash
@@ -224,7 +224,7 @@ Ingresamos la cadena `@n0n_h@CKEr` en el prompt del script `startlab.sh` para co
 
 ![Confirmación de la flag correcta en el script startlab.sh](images/Screenshot_15.png)
 
-##### 4. Mitigaciones
+#### 4. Mitigaciones
 
 * **Deshabilitar Acceso Anónimo en FTP:** Restringir la autenticación anónima en la configuración del servicio vsftpd (`anonymous_enable=NO` en `/etc/vsftpd.conf`) y eliminar archivos con datos confidenciales o credenciales en texto plano almacenados en recursos públicos (`usuarios.txt`).
 * **Implementar Autenticación Segura por SSH:** Reemplazar la autenticación basada en contraseñas débiles por llaves criptográficas SSH (Ed25519) deshabilitando `PasswordAuthentication no` en `/etc/ssh/sshd_config`, y desplegar herramientas de monitoreo como `Fail2Ban` para bloquear ataques de fuerza bruta.
