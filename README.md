@@ -12,10 +12,10 @@
 ### 🟢 Dificultad: Fácil
 
 | Máquina / Reto | Sistema | Writeup |
-| :--- | :---: | :--- | :---: |
-| [**AD JUNIOR**](https://whoami-labs.com/laboratorios/ad-junior)| Windows | [Ver Writeup](./whoami-labs.com/AD%20JUNIOR) |
-| [**Transferencia**](https://whoami-labs.com/laboratorios/transferencia)| Linux  | [Ver Writeup](./whoami-labs.com/Transferencia) |
-| [**SUID**](https://whoami-labs.com/laboratorios/suid)| Linux  | [Ver Writeup](./whoami-labs.com/SUID) |
+| :--- | :---: | :---: |
+| [**AD JUNIOR**](https://whoami-labs.com/laboratorios/ad-junior) | Windows | [Ver Writeup](./whoami-labs.com/AD%20JUNIOR) |
+| [**Transferencia**](https://whoami-labs.com/laboratorios/transferencia) | Linux | [Ver Writeup](./whoami-labs.com/Transferencia) |
+| [**SUID**](https://whoami-labs.com/laboratorios/suid) | Linux | [Ver Writeup](./whoami-labs.com/SUID) |
 
 
 ---
