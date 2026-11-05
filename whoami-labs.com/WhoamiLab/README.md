@@ -2,7 +2,7 @@
 
   **Dificultad:**  Medio  
    **Categoría:**  SUID & Sudo | FTP | SSH | Brute Force | Pivoting  
-   **Autor:**  Dzykhed (Gilberto Wright)  
+   **Autor:**  Dzykhed  
    **Fecha**  : 04-11-2026  
    **Plataforma**  : [Whoami-Labs](https://whoami-labs.com/)
 
