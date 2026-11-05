@@ -2,7 +2,7 @@
 
 **Dificultad:** Fácil  
 **Categoría:** SUID & Sudo | Linux  
-**Autor:** Dzykhed
+**Autor:** Dzykhed  
 **Fecha:** 05-11-2026  
 **Plataforma:** [Whoami-Labs](https://whoami-labs.com/)  
 
