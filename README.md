@@ -23,7 +23,7 @@
 ### 🟡 Dificultad: Medio
 
 | Máquina / Reto | Sistema | Writeup |
-| :--- | :---: | :--- | :---: |
+| :--- | :---: | :--- |
 | [**WhoamiLab**](https://whoami-labs.com/laboratorios/whoamilab) | Linux  | [Ver Writeup](./whoami-labs.com/WhoamiLab) |
 
 ---
@@ -31,16 +31,16 @@
 ### 🟠 Dificultad: Difícil
 
 
-| Máquina / Reto | Sistema | Vectores Clave | Writeup |
-| :--- | :---: | :--- | :---: |
+| Máquina / Reto | Sistema | Writeup |
+| :--- | :---: | :--- |
 
 ---
 
 ### 🔴 Dificultad: Insano
 
 
-| Máquina / Reto | Sistema | Vectores Clave | Writeup |
-| :--- | :---: | :--- | :---: |
+| Máquina / Reto | Sistema | Writeup |
+| :--- | :---: | :--- |
 
 
 ---
